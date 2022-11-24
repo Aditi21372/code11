@@ -56,12 +56,10 @@ int main(void){
     int opa1=1;
     int opa2=2;
     int opa3=3;
-    pthread_setschedparam(thr1,SCHED_OTHER,&param1);
-    pthread_setschedparam(thr2,SCHED_RR,&param2); pthread_setschedparam(thr3,SCHED_FIFO,&param3); 
-    clock_gettime(CLOCK_REALTIME,&sea1);pthread_create(&thr1,NULL,A,&opa1); clock_gettime(CLOCK_REALTIME,&sea2);pthread_create(&thr2,NULL,B,&opa2); clock_gettime(CLOCK_REALTIME,&sea3); pthread_create(&thr3,NULL,C,&opa3);
-    pthread_join(thr1,NULL); clock_gettime(CLOCK_REALTIME,&ele1);
-    pthread_join(thr2,NULL); clock_gettime(CLOCK_REALTIME,&ele2);
-    pthread_join(thr3,NULL); clock_gettime(CLOCK_REALTIME,&ele3);
+    pthread_create(&thr1,NULL,A,&opa1);  pthread_create(&thr2,NULL,B,&opa2);pthread_create(&thr3,NULL,C,&opa3);
+    pthread_setschedparam(thr1,SCHED_OTHER,&param1);pthread_setschedparam(thr2,SCHED_RR,&param2); pthread_setschedparam(thr3,SCHED_FIFO,&param3); 
+    clock_gettime(CLOCK_REALTIME,&sea1);clock_gettime(CLOCK_REALTIME,&sea2); clock_gettime(CLOCK_REALTIME,&sea3); 
+    pthread_join(thr1,NULL); clock_gettime(CLOCK_REALTIME,&ele1);pthread_join(thr2,NULL); clock_gettime(CLOCK_REALTIME,&ele2);pthread_join(thr3,NULL); clock_gettime(CLOCK_REALTIME,&ele3);
     double num= 1000000000.0;
     double time11=(ele1.tv_sec - sea1.tv_sec);
     double time12=(ele1.tv_nsec - sea1.tv_nsec);
